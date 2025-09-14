@@ -49,6 +49,17 @@ jobs:
         NODE_ENV: production
         GITHUB_PAGES: true
         
+    - name: List build output
+      run: |
+        echo "Contents of current directory:"
+        ls -la
+        echo "Contents of dist directory (if exists):"
+        ls -la dist/ || echo "dist directory not found"
+        echo "Contents of build directory (if exists):"
+        ls -la build/ || echo "build directory not found"
+        echo "Looking for index.html files:"
+        find . -name "index.html" -type f
+        
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
