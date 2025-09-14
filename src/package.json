@@ -1,0 +1,52 @@
+{
+  "name": "edugamehub-rural-learning-platform",
+  "version": "1.0.0",
+  "description": "Gamified digital learning platform for rural school students",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:github": "cross-env NODE_ENV=production GITHUB_PAGES=true vite build",
+    "preview": "vite preview",
+    "deploy:netlify": "npm run build && netlify deploy --prod --dir=dist",
+    "deploy:vercel": "npm run build && vercel --prod",
+    "deploy:gh-pages": "npm run build:github && gh-pages -d dist",
+    "serve:local": "npm run build && npx serve dist",
+    "setup:github-pages": "bash ./scripts/setup-github-pages.sh"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.263.1",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^1.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "vite": "^4.4.5",
+    "tailwindcss": "^4.0.0-alpha.25",
+    "autoprefixer": "^10.4.14",
+    "gh-pages": "^6.0.0",
+    "netlify-cli": "^17.0.0",
+    "vercel": "^32.0.0",
+    "serve": "^14.2.1",
+    "cross-env": "^7.0.3"
+  },
+  "keywords": [
+    "education",
+    "gamification",
+    "rural-schools",
+    "stem",
+    "multilingual",
+    "offline",
+    "mobile-first"
+  ],
+  "author": "Rural Education Initiative",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Terrificdatabytes/edugamehub1.git"
+  }
+}
