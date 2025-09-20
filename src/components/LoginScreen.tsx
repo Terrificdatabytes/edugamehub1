@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Badge } from './ui/badge';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 import { 
   BookOpen, 
   GraduationCap, 
@@ -191,6 +192,7 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Demo authentication logic
     const demoUsers = {
       student: { id: 1, name: 'Alex Kumar', level: 12, xp: 2450, badges: 8, rank: 'Science Explorer' },
       teacher: { id: 2, name: 'Dr. Priya Singh', level: 25, xp: 8500, badges: 15, rank: 'Master Educator' },
@@ -220,12 +222,12 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
               {t.welcome} {t.appTitle}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">{t.subtitle}</p>
+            <p className="text-xl text-gray-600">{t.subtitle}</p>
           </div>
 
           {/* Role Selection */}
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-8">{t.selectRole}</h2>
+            <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">{t.selectRole}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {roles.map((role) => {
                 const IconComponent = role.icon;
@@ -239,9 +241,9 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
                       <div className={`w-16 h-16 bg-gradient-to-r ${role.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
                         <IconComponent className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">{role.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{role.description}</p>
-                      <Button className={`mt-4 bg-gradient-to-r ${role.color} text-white hover:opacity-90 border border-gray-300`}>
+                      <h3 className="text-xl font-bold text-gray-800 mb-3">{role.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{role.description}</p>
+                      <Button className={`mt-4 bg-gradient-to-r ${role.color} text-white hover:opacity-90`}>
                         <UserPlus className="w-4 h-4 mr-2" />
                         {t.selectRole}
                       </Button>
@@ -253,20 +255,20 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
           </div>
 
           {/* Demo Credentials Info */}
-          <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 dark:from-green-900 dark:to-emerald-900">
+          <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="w-6 h-6 text-green-600 dark:text-green-300" />
-                <h3 className="font-bold text-green-800 dark:text-green-200">{t.demoCredentials}</h3>
+                <Sparkles className="w-6 h-6 text-green-600" />
+                <h3 className="font-bold text-green-800">{t.demoCredentials}</h3>
               </div>
               <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100 justify-center py-2">
+                <Badge className="bg-blue-100 text-blue-800 justify-center py-2">
                   {t.student}: {t.demoStudent}
                 </Badge>
-                <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-800 dark:text-purple-100 justify-center py-2">
+                <Badge className="bg-purple-100 text-purple-800 justify-center py-2">
                   {t.teacher}: {t.demoTeacher}
                 </Badge>
-                <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-800 dark:text-orange-100 justify-center py-2">
+                <Badge className="bg-orange-100 text-orange-800 justify-center py-2">
                   {t.admin}: {t.demoAdmin}
                 </Badge>
               </div>
@@ -281,14 +283,14 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
   const IconComponent = selectedRoleData.icon;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <Card className={`${selectedRoleData.bgColor} ${selectedRoleData.borderColor} border-2`}>
           <CardHeader className="text-center pb-4">
             <div className={`w-16 h-16 bg-gradient-to-r ${selectedRoleData.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
               <IconComponent className="w-8 h-8 text-white" />
             </div>
-            <CardTitle className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            <CardTitle className="text-2xl font-bold text-gray-800">
               {isLogin ? t.login : t.signup} - {selectedRoleData.title}
             </CardTitle>
           </CardHeader>
@@ -296,26 +298,25 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="username" className="text-black dark:text-white">{t.username}</Label>
+                <Label htmlFor="username" className="text-black">{t.username}</Label>
                 <Input
                   id="username"
                   type="text"
                   value={formData.username}
                   onChange={(e) => handleInputChange('username', e.target.value)}
-                  className="mt-1 text-black dark:text-white"
+                  className="mt-1 text-[rgba(250,250,250,1)]"
                   required
                 />
               </div>
 
               <div>
-                <Label htmlFor="password" className="text-black dark:text-white">{t.password}</Label>
+                <Label htmlFor="password" className="text-black">{t.password}</Label>
                 <div className="relative mt-1">
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChange={(e) => handleInputChange('password', e.target.value)}
-                    className="text-black dark:text-white"
                     required
                   />
                   <Button
@@ -333,13 +334,13 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
               {!isLogin && (
                 <>
                   <div>
-                    <Label htmlFor="confirmPassword" className="text-black dark:text-white">{t.confirmPassword}</Label>
+                    <Label htmlFor="confirmPassword">{t.confirmPassword}</Label>
                     <Input
                       id="confirmPassword"
                       type="password"
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                      className="mt-1 text-black dark:text-white"
+                      className="mt-1"
                       required
                     />
                   </div>
@@ -347,24 +348,24 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
                   {selectedRole === 'student' && (
                     <>
                       <div>
-                        <Label htmlFor="schoolCode" className="text-black dark:text-white">{t.schoolCode}</Label>
+                        <Label htmlFor="schoolCode">{t.schoolCode}</Label>
                         <Input
                           id="schoolCode"
                           type="text"
                           value={formData.schoolCode}
                           onChange={(e) => handleInputChange('schoolCode', e.target.value)}
-                          className="mt-1 text-black dark:text-white"
+                          className="mt-1"
                           required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="grade" className="text-black dark:text-white">{t.grade}</Label>
+                        <Label htmlFor="grade">{t.grade}</Label>
                         <Input
                           id="grade"
                           type="text"
                           value={formData.grade}
                           onChange={(e) => handleInputChange('grade', e.target.value)}
-                          className="mt-1 text-black dark:text-white"
+                          className="mt-1"
                           placeholder="6-12"
                           required
                         />
@@ -376,7 +377,7 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
 
               <Button 
                 type="submit" 
-                className={`w-full bg-gradient-to-r ${selectedRoleData.color} text-white hover:opacity-90 border border-gray-300`}
+                className={`w-full bg-gradient-to-r ${selectedRoleData.color} text-white hover:opacity-90`}
               >
                 <LogIn className="w-4 h-4 mr-2" />
                 {isLogin ? t.loginBtn : t.signupBtn}
@@ -411,4 +412,15 @@ export function LoginScreen({ language, onLogin }: LoginScreenProps) {
               </Button>
 
               {/* Demo credentials reminder */}
-              <div className
+              <div className="bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-lg p-3 text-center">
+                <p className="text-xs text-green-700 dark:text-green-300 font-medium">
+                  {t.demoCredentials}: {selectedRole} / demo123
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
